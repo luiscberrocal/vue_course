@@ -36,7 +36,7 @@
             <button id="attack" @click="attack">ATTACK</button>
             <button id="special-attack">SPECIAL ATTACK</button>
             <button id="heal">HEAL</button>
-            <button id="give-up" @click="gameStarted = false">GIVE UP</button>
+            <button id="give-up" @click="giveUp()">GIVE UP</button>
         </div>
     </section>
     <section class="row log">
@@ -67,6 +67,12 @@
                 this.heroCharge += heroHit
                 this.hits.push("Hero got hit " + heroHit)
                 this.hits.push("Monster got hit " + monsterHit)
+            },
+            giveUp: function () {
+                this.gameStarted = false;
+                this.hits = [];
+                this.heroCharge = 100;
+                this.monsterCharge = 100;
             }
         }
 
