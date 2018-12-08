@@ -42,8 +42,8 @@
     <section class="row log">
         <div class="small-12 columns">
             <ul>
-                <li>
-
+                <li v-for="hit in hits">
+                    {{ hit }}
                 </li>
             </ul>
         </div>
@@ -57,13 +57,16 @@
             heroCharge: 100,
             monsterCharge: 100,
             gameStarted: false,
+            hits: [],
         },
-        methods:{
+        methods: {
             attack: function () {
                 var heroHit = Math.round(Math.random() * -10);
                 var monsterHit = Math.round(Math.random() * -10);
-                this.monsterCharge  += monsterHit
-                this.heroCharge  += heroHit
+                this.monsterCharge += monsterHit
+                this.heroCharge += heroHit
+                this.hits.push("Hero got hit " + heroHit)
+                this.hits.push("Monster got hit " + monsterHit)
             }
         }
 
