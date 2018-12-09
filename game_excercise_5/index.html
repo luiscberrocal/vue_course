@@ -13,7 +13,7 @@
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
-                :style="{width: playersHealth + '%'}">
+                     :style="{width: playersHealth + '%'}">
                     {{ playersHealth }}
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="healthbar">
                 <div class="healthbar text-center"
                      style="background-color: green; margin: 0; color: white;"
-                    :style="{width: monstersHealth + '%'}">
+                     :style="{width: monstersHealth + '%'}">
                     {{ monstersHealth }}
                 </div>
             </div>
@@ -31,7 +31,7 @@
     </section>
     <section class="row controls" v-if="!gameIsRunning">
         <div class="small-12 columns">
-            <button id="start-game" @click="gameIsRunning = true">START NEW GAME</button>
+            <button id="start-game" @click="startGame()">START NEW GAME</button>
         </div>
     </section>
     <section class="row controls" v-if="gameIsRunning">
@@ -63,13 +63,19 @@
             hits: [],
         },
         methods: {
+            startGame: function () {
+                this.gameIsRunning = true;
+                this.hits = [];
+                this.playersHealth = 100;
+                this.monstersHealth = 100;
+            },
             attack: function () {
                 var heroHit = Math.round(Math.random() * -10);
                 var monsterHit = Math.round(Math.random() * -10);
                 this.monstersHealth += monsterHit
                 this.playersHealth += heroHit
-                this.hits.push({message:"Hero got hit " + heroHit, class:"player-turn"})
-                this.hits.push({message:"Monster got hit " + monsterHit, class:"monster-turn"})
+                this.hits.push({message: "Hero got hit " + heroHit, class: "player-turn"})
+                this.hits.push({message: "Monster got hit " + monsterHit, class: "monster-turn"})
             },
             giveUp: function () {
                 this.gameIsRunning = false;
