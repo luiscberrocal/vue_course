@@ -12,26 +12,29 @@
         <div class="small-6 columns">
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-                    {{ heroCharge }}
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
+                :style="{width: playersHealth + '%'}">
+                    {{ playersHealth }}
                 </div>
             </div>
         </div>
         <div class="small-6 columns">
             <h1 class="text-center">MONSTER</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-                    {{ monsterCharge }}
+                <div class="healthbar text-center"
+                     style="background-color: green; margin: 0; color: white;"
+                    :style="{width: monstersHealth + '%'}">
+                    {{ monstersHealth }}
                 </div>
             </div>
         </div>
     </section>
-    <section class="row controls" v-if="!gameStarted">
+    <section class="row controls" v-if="!gameIsRunning">
         <div class="small-12 columns">
-            <button id="start-game" @click="gameStarted = true">START NEW GAME</button>
+            <button id="start-game" @click="gameIsRunning = true">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls" v-if="gameStarted">
+    <section class="row controls" v-if="gameIsRunning">
         <div class="small-12 columns">
             <button id="attack" @click="attack">ATTACK</button>
             <button id="special-attack">SPECIAL ATTACK</button>
@@ -42,8 +45,8 @@
     <section class="row log">
         <div class="small-12 columns">
             <ul>
-                <li v-for="hit in hits">
-                    {{ hit }}
+                <li v-for="hit in hits" class="{{ hit.class }}">
+                    {{ hit.message }}
                 </li>
             </ul>
         </div>
@@ -54,25 +57,25 @@
     new Vue({
         el: "#app",
         data: {
-            heroCharge: 100,
-            monsterCharge: 100,
-            gameStarted: false,
+            playersHealth: 100,
+            monstersHealth: 100,
+            gameIsRunning: false,
             hits: [],
         },
         methods: {
             attack: function () {
                 var heroHit = Math.round(Math.random() * -10);
                 var monsterHit = Math.round(Math.random() * -10);
-                this.monsterCharge += monsterHit
-                this.heroCharge += heroHit
-                this.hits.push("Hero got hit " + heroHit)
-                this.hits.push("Monster got hit " + monsterHit)
+                this.monstersHealth += monsterHit
+                this.playersHealth += heroHit
+                this.hits.push({message:"Hero got hit " + heroHit, class:"player-turn"})
+                this.hits.push({message:"Monster got hit " + monsterHit, class:"monster-turn"})
             },
             giveUp: function () {
-                this.gameStarted = false;
+                this.gameIsRunning = false;
                 this.hits = [];
-                this.heroCharge = 100;
-                this.monsterCharge = 100;
+                this.playersHealth = 100;
+                this.monstersHealth = 100;
             }
         }
 
