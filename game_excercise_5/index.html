@@ -70,26 +70,16 @@
                 this.monstersHealth = 100;
             },
             attack: function () {
-                var max = 10;
-                var min = 3;
-                var damage = Math.max(Math.floor(Math.random() * max) + 1, min);
-                this.monstersHealth -= damage;
 
-                if (this.monstersHealth <= 0){
-                    alert('You won');
-                    this.gameIsRunning = false;
+                this.monstersHealth -= this.calculateDamage(3, 10);
+
+                if (this.checkWin()){
                     return;
                 };
 
-                max = 12;
-                min = 5;
-                damage = Math.max(Math.floor(Math.random() * max) + 1, min);
-                this.playersHealth -= damage;
+                this.playersHealth -= this.calculateDamage(5, 12);
 
-                if (this.playersHealth <= 0){
-                    alert('You lost!!');
-                    this.gameIsRunning = false;
-                };
+                this.checkWin()
 
             },
             giveUp: function () {
@@ -97,6 +87,27 @@
                 this.hits = [];
                 this.playersHealth = 100;
                 this.monstersHealth = 100;
+            },
+            calculateDamage: function (min, max) {
+                return Math.max(Math.floor(Math.random() * max) + 1, min);
+            },
+            checkWin: function () {
+                if (this.monstersHealth <= 0){
+                    if(confirm('You won! New game?')){
+                        this.startGame();
+                    }else {
+                        this.gameIsRunning = false
+                    }
+                   return true;
+                } else if (this.playersHealth <= 0){
+                    if(confirm('You lost! New game?')){
+                        this.startGame();
+                    }else {
+                        this.gameIsRunning = false
+                    }
+                    return true;
+                };
+                return false;
             }
         }
 
