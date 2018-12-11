@@ -42,11 +42,11 @@
             <button id="give-up" @click="giveUp()">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="hit in hits" class="{{ hit.class }}">
-                    {{ hit.message }}
+                <li v-for="hit in turns" class="">
+                    {{ hit.text }}
                 </li>
             </ul>
         </div>
@@ -60,7 +60,7 @@
             playersHealth: 100,
             monstersHealth: 100,
             gameIsRunning: false,
-            hits: [],
+            turns: [],
         },
         methods: {
             startGame: function () {
@@ -70,11 +70,21 @@
                 this.monstersHealth = 100;
             },
             monsterAttacks: function () {
-                this.playersHealth -= this.calculateDamage(5, 12);
+                var damage = this.calculateDamage(5, 12)
+                this.playersHealth -= damage;
+                this.turns.unshift({
+                    isPlayer: false,
+                    text: 'Monster hits the Player for ' + damage
+                })
                 this.checkWin()
             },
             attack: function () {
-                this.monstersHealth -= this.calculateDamage(3, 10);
+                var damage = this.calculateDamage(3, 10);
+                this.monstersHealth -= damage
+                this.turns.unshift({
+                    isPlayer: true,
+                    text: 'Player hits the monster for ' + damage
+                })
                 if (this.checkWin()) {
                     return;
                 }
