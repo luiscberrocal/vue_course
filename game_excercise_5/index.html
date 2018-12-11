@@ -45,8 +45,8 @@
     <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="hit in turns" class="">
-                    {{ hit.text }}
+                <li v-for="turn in turns":class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                    {{ turn.text }}
                 </li>
             </ul>
         </div>
@@ -65,7 +65,7 @@
         methods: {
             startGame: function () {
                 this.gameIsRunning = true;
-                this.hits = [];
+                this.turns = [];
                 this.playersHealth = 100;
                 this.monstersHealth = 100;
             },
@@ -75,7 +75,7 @@
                 this.turns.unshift({
                     isPlayer: false,
                     text: 'Monster hits the Player for ' + damage
-                })
+                });
                 this.checkWin()
             },
             attack: function () {
@@ -84,7 +84,7 @@
                 this.turns.unshift({
                     isPlayer: true,
                     text: 'Player hits the monster for ' + damage
-                })
+                });
                 if (this.checkWin()) {
                     return;
                 }
@@ -93,7 +93,12 @@
 
             },
             specialAttack: function () {
-                this.monstersHealth -= this.calculateDamage(10, 20);
+                var damage = this.calculateDamage(10, 20);
+                this.monstersHealth -= damage;
+                this.turns.unshift({
+                    isPlayer: true,
+                    text: 'Player hits hard the monster for ' + damage
+                });
                 if (this.checkWin()) {
                     return;
                 }
@@ -107,6 +112,10 @@
                 }else {
                     this.playersHealth = 100;
                 }
+                this.turns.unshift({
+                    isPlayer: true,
+                    text: 'Player heals for 10'
+                });
                 this.monsterAttacks()
             },
             giveUp: function () {
