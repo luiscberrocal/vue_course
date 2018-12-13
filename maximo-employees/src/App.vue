@@ -3,8 +3,22 @@
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
     <div class="row">
-      <button v-for="employee, index in employees" @click="deleteEmployee(index)" v-bind:id="index">{{ employee.username}} {{index}}</button>
+      <h3>Selected</h3>
     </div>
+    <div class="row">
+      <button v-for="employee, index in employees"
+              @click="unselectEmployee(index)"
+              v-bind:id="index">{{ employee.username}} {{index}}</button>
+    </div>
+    <div class="row">
+      <h3>UnSelected</h3>
+    </div>
+     <div class="row">
+      <button v-for="employee, index in unselectedEmployees"
+              @click="selectEmployee(index)"
+              v-bind:id="index">{{ employee.username}} {{index}}</button>
+    </div>
+    <hr>
     <div>
       {{ sqlQuery }}
     </div>
@@ -23,7 +37,9 @@
           {username: 'DArdines'},
           {username: 'JoCarrillo'},
           {username: 'MaVeces'},
-        ]
+          {username: 'Gvillarreal'},
+        ],
+        unselectedEmployees:[]
       }
     },
     computed:{
@@ -40,8 +56,13 @@
       }
     },
     methods:{
-      deleteEmployee(index){
+      unselectEmployee(index){
+        this.unselectedEmployees.unshift(this.employees[index])
         this.$delete(this.employees, index);
+      },
+       selectEmployee(index){
+        this.employees.unshift(this.unselectedEmployees[index])
+        this.$delete(this.unselectedEmployees, index);
       }
     }
   }
