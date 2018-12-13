@@ -30,6 +30,7 @@
                 </footer>
             </div>
         </div>
+        <server-footer></server-footer>
     </div>
 </template>
 
