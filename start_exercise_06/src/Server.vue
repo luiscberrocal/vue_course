@@ -1,17 +1,18 @@
 <template>
     <li
             class="list-group-item"
-            v-for="server in servers">
+            >
         Server #{{ server.id }} <span
-            :class="{normal: server.status === 'Normal', critical: server.status === 'Critical' }">Status: {{server.status}}</span>
+            :class="{normal: server.status === 'Normal', critical: server.status === 'Critical', unknown: server.status === 'Unknown' }">
+        Status: {{server.status}}</span>
     </li>
 </template>
 
 <script>
     export default {
         props: {
-            servers:{
-                type: Array
+            server:{
+                type: Object
             }
         },
 
@@ -28,6 +29,11 @@
     .critical {
         background-color: red;
         color: pink;
+        padding: 5px;
+    }
+     .unknown {
+        background-color: gray;
+        color: black;
         padding: 5px;
     }
 </style>
