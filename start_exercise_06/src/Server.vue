@@ -1,6 +1,8 @@
 <template>
     <li
             class="list-group-item"
+            @click="changeServer(server)"
+            style="cursor:pointer"
             >
         Server #{{ server.id }} <span
             :class="{normal: server.status === 'Normal', critical: server.status === 'Critical', unknown: server.status === 'Unknown' }">
@@ -9,11 +11,20 @@
 </template>
 
 <script>
+    import {eventBus} from "./main";
+
     export default {
         props: {
             server:{
                 type: Object
             }
+        },
+        methods:{
+            changeServer: function (server) {
+                //alert('Server ' + server.id);
+                eventBus.$emit('serverSelected', server);
+            }
+
         },
 
         name: "Server"

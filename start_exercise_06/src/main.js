@@ -12,7 +12,9 @@ Vue.component('server-details', ServerDetails)
 Vue.component('servers', Servers)
 Vue.component('server', Server)
 
+export const eventBus = new Vue()
+
 new Vue({
-  el: '#app',
-  render: h => h(App)
+    el: '#app',
+    render: h => h(App)
 })
