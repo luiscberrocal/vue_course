@@ -6,7 +6,7 @@
       <h3>Selected</h3>
     </div>
     <div class="row">
-      <employees :employees="employees"></employees>
+      <employees :selected-employees="employees"></employees>
     </div>
     <div class="row" v-if="unselectedEmployees.length > 0">
       <h3>UnSelected</h3>
@@ -14,7 +14,7 @@
      <div class="row">
       <button v-for="employee, index in unselectedEmployees"
               @click="selectEmployee(index)"
-              v-bind:id="index">{{ employee.username}} {{index}}</button>
+              v-bind:id="'employee-' + index">{{ employee.username}} {{index}}</button>
     </div>
     <hr>
     <div>
