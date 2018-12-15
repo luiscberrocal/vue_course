@@ -6,11 +6,9 @@
       <h3>Selected</h3>
     </div>
     <div class="row">
-      <button v-for="employee, index in employees"
-              @click="unselectEmployee(index)"
-              v-bind:id="index">{{ employee.username}} {{index}}</button>
+      <employees :employees="employees"></employees>
     </div>
-    <div class="row">
+    <div class="row" v-if="unselectedEmployees.length > 0">
       <h3>UnSelected</h3>
     </div>
      <div class="row">
@@ -26,8 +24,10 @@
 </template>
 
 <script>
+
   export default {
     name: 'app',
+
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
@@ -73,7 +73,7 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+    text-align: left;
     color: #2c3e50;
     margin-top: 60px;
   }
