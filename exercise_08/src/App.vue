@@ -37,7 +37,10 @@
                         this.quotes.splice(index, 1);
                     }
                 }
-            })
+            });
+            eventBus.$on('addQuote', (newQuote) => {
+                this.quotes.unshift({id: this.quotes.length + 1, content: newQuote});
+            });
         }
 
     }

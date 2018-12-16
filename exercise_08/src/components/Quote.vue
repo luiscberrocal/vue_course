@@ -14,8 +14,8 @@
                 required: true
             }
         },
-        methods:{
-            deleteQuote(quote){
+        methods: {
+            deleteQuote(quote) {
                 eventBus.$emit('deleteQuote', quote);
             }
         },
@@ -24,5 +24,9 @@
 </script>
 
 <style scoped>
+    div {
+        border: 1px blue;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 
 </style>
