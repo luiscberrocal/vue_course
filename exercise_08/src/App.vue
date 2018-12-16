@@ -2,7 +2,7 @@
 
     <div class="container">
         <h1>Quotes</h1>
-        <progress-bar></progress-bar>
+        <progress-bar :quote-count="quotes.length"></progress-bar>
         <hr>
         <quote-form></quote-form>
         <hr>

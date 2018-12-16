@@ -9,17 +9,20 @@
 
 <script>
     import {eventBus} from "../main";
+
     export default {
-        data(){
-          return{
-              newQuote: ''
-          }
+        data() {
+            return {
+                newQuote: ''
+            }
         },
         methods: {
-            addQuote(){
+            addQuote() {
                 //console.log(this.newQuote);
-                eventBus.$emit('addQuote', this.newQuote);
-                this.newQuote = '';
+                if (this.newQuote != '') {
+                    eventBus.$emit('addQuote', this.newQuote);
+                    this.newQuote = '';
+                }
             }
         },
         name: "QuoteForm"

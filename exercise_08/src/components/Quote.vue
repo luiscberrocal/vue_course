@@ -1,5 +1,6 @@
 <template>
-    <div class="col-md-2" style="cursor: pointer" @click="deleteQuote(quote)">
+    <div class="col-md-2 quote" style="cursor: pointer"
+         @click="deleteQuote(quote)">
         {{quote.content}}
     </div>
 </template>
@@ -25,8 +26,10 @@
 
 <style scoped>
     div {
-        border: 1px blue;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: black;
+        border: 1px solid red;
+        font-family: Baghdad;
+        margin: 20px auto;
     }
 
 </style>
