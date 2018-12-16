@@ -1,10 +1,13 @@
 <template>
-    <section class="row">
-        <div class="row">
-            <textarea name="newQuout" id="" cols="100" rows="5" v-model="newQuote"></textarea>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 form-group">
+            <label for="q">Quote</label>
+            <textarea name="newQuout" id="q" rows="3" v-model="newQuote" class="form-control"></textarea>
         </div>
-        <button class="btn btn-primary" @click="addQuote">Add</button>
-    </section>
+        <div class="col-md-6 col-md-offset-3 form-group">
+            <button class="btn btn-primary" @click="addQuote">Add</button>
+        </div>
+    </div>
 </template>
 
 <script>

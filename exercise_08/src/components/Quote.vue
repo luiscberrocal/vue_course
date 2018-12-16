@@ -1,7 +1,12 @@
 <template>
-    <div class="col-md-2 quote" style="cursor: pointer"
+    <div class="col-md-2"
          @click="deleteQuote(quote)">
-        {{quote.content}}
+        <div class="panel panel-default">
+            <div class="panel-body quote">
+                 {{quote.content}}
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -25,11 +30,18 @@
 </script>
 
 <style scoped>
-    div {
-        color: black;
-        border: 1px solid red;
-        font-family: Baghdad;
-        margin: 20px auto;
+    .panel-body {
+        font-family: Arizonia, cursive;
+        font-size: 24px;
+        color: #6e6e6e;
+
+    }
+    .quote {
+       cursor: pointer;
+
+    }
+    .quote:hover{
+        background-color: #ffc0c1;
     }
 
 </style>
