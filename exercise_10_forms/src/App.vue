@@ -15,6 +15,7 @@
                      v-model="userData.storeData"
                       v-model="userData.storeData"
                     -->
+                    <full-name v-model="userData.fullName"></full-name>
                     <div class="form-group">
                         <label for="full-name">Full Name</label>
                         <input
@@ -96,6 +97,7 @@
 </template>
 
 <script>
+    import FullName from './FullName.vue'
     export default {
         data() {
             return {
@@ -113,6 +115,9 @@
                 this.formSubmitted = true;
             }
         },
+        components:{
+            fullName: FullName
+        }
     }
 </script>
 
