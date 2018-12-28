@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <stock-header></stock-header>
-    <router-view/>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <stock-header></stock-header>
+        <router-view/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,11 +21,14 @@
 </script>
 
 <style>
-  #app {
+  body {
+    padding: 30px;
+  }
+  /*#app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-  }
+  }*/
 </style>
