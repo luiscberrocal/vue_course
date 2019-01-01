@@ -15,17 +15,21 @@
       <ul class="navbar-nav my-2 my-lg-2">
         <li class="nav-item"><a class="nav-link">Funds: {{funds | currency}}</a></li>
         <li class="nav-item" @click="endDay"><a class="nav-link">End Day</a></li>
-        <li class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">Save & Load
+        <li class="nav-item dropdown"
+            :class="{show: isDropdownOpen}"
+            @click="isDropdownOpen = !isDropdownOpen">
+          <a class="nav-link dropdown-toggle"
+             href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false"
+          >Save & Load
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+               :class="{show: isDropdownOpen}">
+            <a class="dropdown-item" href="#">Save data</a>
+            <a class="dropdown-item" href="#">Load data</a>
           </div>
         </li>
+
       </ul>
     </div>
   </nav>
@@ -35,6 +39,11 @@
   import {mapActions} from 'vuex';
 
   export default {
+    data() {
+      return {
+        isDropdownOpen: false
+      }
+    },
     computed: {
       funds() {
         return this.$store.getters.funds;
