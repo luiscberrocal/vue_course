@@ -2,7 +2,7 @@
   <div class="col-sm-6 col-md-4 col-xs-12">
     <div class="card">
       <h5 class="card-header">{{ stock.name }}
-        <small>{{stock.price}}</small>
+        <small>Price: {{stock.price}}</small>
       </h5>
       <div class="card-body">
         <div class="float-md-left float-xs-left">
@@ -53,6 +53,7 @@
           quantity: this.quantity
         };
         console.log(order);
+        this.$store.dispatch('buyStock', order);
         this.quantity = 0;
 
       }
