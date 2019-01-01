@@ -25,7 +25,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                :class="{show: isDropdownOpen}">
-            <a class="dropdown-item" href="#">Save data</a>
+            <a class="dropdown-item" href="#" @click="saveData">Save data</a>
             <a class="dropdown-item" href="#">Load data</a>
           </div>
         </li>
@@ -55,6 +55,14 @@
       ]),
       endDay() {
         this.randomizeStocks();
+      },
+      saveData(){
+        const data = {
+          funds: this.$store.getters.funds,
+          portfolio: this.$store.getters.stockPortfolio,
+          stock: this.$store.getters.stocks
+        };
+        this.$http.put('data.json', data);
       }
     },
     name: "Header"
