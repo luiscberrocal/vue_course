@@ -5,14 +5,15 @@
         <small>Price: {{stock.price}}</small>
       </h5>
       <div class="card-body">
-        <div class="float-md-left float-xs-left">
+        <div class="col-md-8 float-md-left float-xs-left">
           <input type="number" class="form-control" placeholder="Quantity"
-                 v-model="quantity" @focus="$event.target.select()">
+                 v-model="quantity" @focus="$event.target.select()"
+          :class="{'danger': insufficientFunds}">
         </div>
-        <div class="float-md-right float-xs-right">
+        <div class="col-md-4 float-md-right float-xs-right">
           <button class="btn btn-success"
                   @click="buyStock"
-                  :disabled="allowBuy">Buy
+                  :disabled="allowBuy">{{insufficientFunds ? 'Insufficient Funds': 'Buy'}}
           </button>
         </div>
       </div>
@@ -35,10 +36,13 @@
       }
     },
     computed: {
+      insufficientFunds(){
+        return this.quantity * this.stock.price > this.$store.getters.funds
+      },
       allowBuy() {
         let isDecimal = !this.isInt(this.quantity);
         let isNegative = this.quantity <= 0;
-        let haveMoney = !(this.quantity * this.stock.price <= this.$store.getters.funds);
+        let haveMoney = this.insufficientFunds;
         let disabled = isDecimal || isNegative || haveMoney;
         // console.log(`Decimal: ${isDecimal}`);
         // console.log(`Negative: ${isNegative}`);
@@ -64,5 +68,7 @@
 </script>
 
 <style scoped>
-
+.danger{
+  border: 1px solid red;
+}
 </style>
