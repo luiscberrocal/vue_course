@@ -6,7 +6,8 @@
       </h5>
       <div class="card-body">
         <div class="float-md-left float-xs-left">
-          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
+          <input type="number" class="form-control" placeholder="Quantity"
+                 v-model="quantity" @focus="$event.target.select()">
         </div>
         <div class="float-md-right float-xs-right">
           <button class="btn btn-success"
@@ -20,7 +21,9 @@
 </template>
 
 <script>
+  import ComponentMxin from '../mixins'
   export default {
+    mixins:[ComponentMxin],
     props: {
       stock: {
         type: Object
@@ -35,7 +38,8 @@
       allowBuy() {
         let isDecimal = !this.isInt(this.quantity);
         let isNegative = this.quantity <= 0;
-        let disabled = isDecimal || isNegative;
+        let haveMoney = !(this.quantity * this.stock.price <= this.$store.getters.funds);
+        let disabled = isDecimal || isNegative || haveMoney;
         // console.log(`Decimal: ${isDecimal}`);
         // console.log(`Negative: ${isNegative}`);
         // console.log(`Disabled: ${disabled}`);
@@ -43,9 +47,6 @@
       },
     },
     methods: {
-      isInt(n) {
-        return n % 1 === 0;
-      },
       buyStock() {
         const order = {
           stockId: this.stock.id,

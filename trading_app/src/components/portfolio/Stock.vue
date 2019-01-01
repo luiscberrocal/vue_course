@@ -6,7 +6,8 @@
       </h5>
       <div class="card-body">
         <div class="float-md-left float-xs-left">
-          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
+          <input type="number" class="form-control" placeholder="Quantity"
+                 v-model="quantity" @focus="$event.target.select()">
         </div>
         <div class="float-md-right float-xs-right">
           <button class="btn btn-success"

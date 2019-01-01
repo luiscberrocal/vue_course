@@ -13,9 +13,6 @@
       ...mapGetters({
         stocks: 'stockPortfolio'
       }),
-      stocksR() {
-        return this.$store.getters.stockPortfolio;
-      }
     },
     components: {
       portfolioStock: Stock
