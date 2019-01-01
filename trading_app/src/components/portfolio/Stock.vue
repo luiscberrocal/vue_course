@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-6 col-md-4 col-xs-12">
     <div class="card">
-      <h5 class="card-header">{{ stock.name }}
+      <h5 class="card-header text-white bg-primary">{{ stock.name }}
         <small>Price: {{stock.price}} | Quantiy: {{stock.quantity}}</small>
       </h5>
       <div class="card-body">
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex';
+
   export default {
     props: {
       stock: {
@@ -31,19 +33,24 @@
         quantity: 0
       }
     },
-    computed:{
-      disableSell(){
+    computed: {
+      disableSell() {
         return false;
       }
     },
     methods: {
+      ...mapActions({
+        placeSellOrder: 'sellStock'
+      }),
       sellStock() {
         const order = {
           stockId: this.stock.id,
           stockPrice: this.stock.price,
           quantity: this.quantity
         };
-        this.$store.dispatch('sellStock', order);
+        //this.$store.dispatch('sellStock', order);
+        this.placeSellOrder(order);
+        this.quantity = 0;
       }
     },
     name: "Stock"
