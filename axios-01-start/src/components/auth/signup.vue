@@ -104,7 +104,7 @@
                     hobbies: this.hobbyInputs.map(hobby => hobby.value),
                     terms: this.terms
                 }
-                const url = 'https://vuejs-course-fabc9.firebaseio.com/users.json'
+                const url = '/users.json'
                 axios.post(url, formData)
                     .then(response => console.log(response))
                     .catch(error => console.log(error));

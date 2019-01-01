@@ -15,7 +15,7 @@
             }
         },
         created() {
-            const url = 'https://vuejs-course-fabc9.firebaseio.com/users.json'
+            const url = '/users.json'
             axios.get(url)
                 .then(response => {
                      console.log(response);
