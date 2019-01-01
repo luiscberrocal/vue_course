@@ -21,17 +21,21 @@ const mutations = {
       state.stocks.splice(state.stocks.indexOf(record), 1);
     }
     state.funds += quantity * stockPrice;
+  },
+  'SET_PORTFOLIO'(state, portfolio) {
+    state.funds = portfolio.funds;
+    state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : [];
   }
 }
 
 const actions = {
-  sellStock({commit}, order){
+  sellStock({commit}, order) {
     commit('SELL_STOCK', order);
   }
 }
 
 const getters = {
-  stockPortfolio(state, getters){
+  stockPortfolio(state, getters) {
     return state.stocks.map(stock => {
         const record = getters.stocks.find(element => element.id == stock.id);
         return {
@@ -43,7 +47,7 @@ const getters = {
       }
     );
   },
-  funds(state){
+  funds(state) {
     return state.funds;
   }
 }

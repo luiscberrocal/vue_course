@@ -26,7 +26,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"
                :class="{show: isDropdownOpen}">
             <a class="dropdown-item" href="#" @click="saveData">Save data</a>
-            <a class="dropdown-item" href="#">Load data</a>
+            <a class="dropdown-item" href="#" @click="loadData">Load data</a>
           </div>
         </li>
 
@@ -50,19 +50,24 @@
       }
     },
     methods: {
-      ...mapActions([
-        'randomizeStocks'
-      ]),
+      ...mapActions({
+        randomizeStocks: 'randomizeStocks',
+        fetchData: 'loadData'
+
+      }),
       endDay() {
         this.randomizeStocks();
       },
       saveData(){
         const data = {
           funds: this.$store.getters.funds,
-          portfolio: this.$store.getters.stockPortfolio,
-          stock: this.$store.getters.stocks
+          stockPortfolio: this.$store.getters.stockPortfolio,
+          stocks: this.$store.getters.stocks
         };
         this.$http.put('data.json', data);
+      },
+      loadData(){
+        this.fetchData();
       }
     },
     name: "Header"
