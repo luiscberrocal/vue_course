@@ -13,7 +13,7 @@
         <router-link to="/stocks" activeClass="active" tag="li"><a class="nav-link">Stocks</a></router-link>
       </ul>
       <ul class="navbar-nav my-2 my-lg-2">
-        <li class="nav-item"><a class="nav-link">Funds: {{funds}}</a></li>
+        <li class="nav-item"><a class="nav-link">Funds: {{funds | currency}}</a></li>
         <li class="nav-item"><a class="nav-link">End Day</a></li>
         <li class="dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

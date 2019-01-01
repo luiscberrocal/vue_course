@@ -3,7 +3,7 @@
     <h1>Trade or View your portfolio</h1>
       <h6>Play the game</h6>
     <hr>
-    <p>Your funds: {{funds}}</p>
+    <p>Your funds: {{funds | currency}}</p>
   </div>
 
 </template>

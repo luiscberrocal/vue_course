@@ -7,12 +7,13 @@
       <div class="card-body">
         <div class="float-md-left float-xs-left">
           <input type="number" class="form-control" placeholder="Quantity"
-                 v-model="quantity" @focus="$event.target.select()">
+                 v-model="quantity" @focus="$event.target.select()"
+                 :class="{'danger': insufficientQuantity}">
         </div>
         <div class="float-md-right float-xs-right">
           <button class="btn btn-success"
                   @click="sellStock"
-                  :disabled="disableSell">Sell
+                  :disabled="insufficientQuantity|| disableSell">{{insufficientQuantity ? 'Not enough': 'Sell'}}
           </button>
         </div>
       </div>
@@ -22,8 +23,10 @@
 
 <script>
   import {mapActions} from 'vuex';
+  import ComponentMxin from '../mixins'
 
   export default {
+    mixins: [ComponentMxin],
     props: {
       stock: {
         type: Object
@@ -35,8 +38,24 @@
       }
     },
     computed: {
+      insufficientQuantity() {
+        return this.quantity > this.stock.quantity;
+      },
       disableSell() {
-        return false;
+        let isDecimal = !this.isInt(this.quantity);
+        let isNegative = this.quantity <= 0;
+        let disabled = isDecimal || isNegative;
+
+        console.log('------------------------------');
+        console.log(`Quantity: ${this.quantity}`)
+        console.log(`Stocks: ${this.stock.quantity}`)
+        console.log(`Decimal: ${isDecimal}`);
+        console.log(`Negative: ${isNegative}`);
+        console.log('------------------------------');
+        console.log(`Disabled: ${disabled}`);
+        console.log('==============================');
+
+        return disabled;
       }
     },
     methods: {
@@ -59,5 +78,7 @@
 </script>
 
 <style scoped>
-
+  .danger {
+    border: 1px solid red;
+  }
 </style>

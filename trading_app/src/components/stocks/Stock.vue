@@ -68,7 +68,7 @@
 </script>
 
 <style scoped>
-.danger{
-  border: 1px solid red;
-}
+  .danger {
+    border: 1px solid red;
+  }
 </style>
